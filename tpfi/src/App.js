@@ -13,8 +13,8 @@ const Resultado= (props)=>{
       <label> pierde contra  </label>
   )
   
-return(
-  <label>  </label>
+  return(
+    <label>  </label>
 )
 
 }
@@ -22,8 +22,8 @@ return(
 
 const PlayImage = (props) => {
   const {jugada, side}=props;
-  if (jugada !="" )
-      return <img src= {"./image/"+jugada+"-"+side+".jpg"} width= "200" height="200" ></img>;
+  if (jugada !== "" )
+      return <img src= {"./image/"+jugada+"-"+side+".jpg"} width= "200" height="200" alt = "jugada"></img>;
   return <h6>{props.message}</h6>
 };
 
@@ -33,7 +33,8 @@ const App= ()=> {
   const [Jugador1, setJugador1]= useState("");
   const [Jugador2, setJugador2]= useState("");
   const [Estado, setEstado]= useState("");
-  const [Counter, setCounter]= useState([0,0]);
+  const [Counter1, setCounter1]= useState(0);
+  const [Counter2,setCounter2]= useState(0);
 
   const opciones = ["Piedrar", "Papel", "Tijera", "Lagarto", "Spock"]; 
 
@@ -46,8 +47,8 @@ const App= ()=> {
   })
 
   const updateCount=(est)=> {
-      if (est==="Ganador 1") {setCounter( [Counter[0]+1, Counter[1]]) }
-        else { if (est==="Ganador 2") {setCounter( [Counter[0], Counter[1]+1]) } }
+      if (est==="Ganador 1") {setCounter1(prevState=> prevState+1) }
+        else { if (est==="Ganador 2") {setCounter2(prevState=> prevState+1) } }
     }
 
   const handleClick= (event)=>{
@@ -57,6 +58,7 @@ const App= ()=> {
     setJugador1(name);
     setJugador2(j2);
     const est=evaluar(Jugador1,Jugador2);
+    // revisar  no se  actualiza correctamente
     setEstado(est);
     updateCount(est);
   }
@@ -88,7 +90,6 @@ const App= ()=> {
   
   const  selectPlay= ()=>{
     const value= Math.floor(Math.random() * 5) + 1;
-    console.log(value)
     let ret = ""
     switch (value) {
       case 1:
@@ -112,7 +113,8 @@ const App= ()=> {
   
   
   const handleReset=()=> {
-        setCounter([0,0]);
+        setCounter1(0);
+        setCounter2(0);
         setJugador1("");
         setJugador2("");
         setEstado("");
@@ -126,7 +128,7 @@ const App= ()=> {
           <div className="col">
               <h2>Jugador 1</h2>
             <div>
-              <h1>{Counter[0]}</h1>
+              <h1>{Counter1}</h1>
             </div>
           </div>
           <div className="col-8">
@@ -135,7 +137,7 @@ const App= ()=> {
           <div className="col">
             <h2>Jugador 2</h2>
             <div>
-              <h1> {Counter[1]} </h1>
+              <h1> {Counter2} </h1>
             </div>  
           </div>
          </div>
@@ -143,19 +145,19 @@ const App= ()=> {
         <div className="row">
           <div className="col">
             <div>  
-              <button  onClick={handleClick} name= "Piedra" className= "btn btn-primary btn-lg btn-block"> Piedra</button> 
+              <button  onClick={handleClick} name= "Piedra" className= "btn btn-primary btn-lg btn-block" >Piedra</button> 
             </div>
             <div>  
-              <button  onClick= {handleClick} name ="Papel"className= "btn btn-primary btn-lg btn-block">Papel</button> 
+              <button  onClick= {handleClick} name ="Papel"className= "btn btn-primary btn-lg btn-block" >Papel</button> 
             </div>
             <div>  
-              <button  onClick= {handleClick} name ="Tijera" className= "btn btn-primary btn-lg btn-block">Tijera</button> 
+              <button  onClick= {handleClick} name ="Tijera" className= "btn btn-primary btn-lg btn-block" >Tijera</button> 
             </div>
             <div>  
               <button  onClick= {handleClick} name ="Lagarto" className= "btn btn-primary btn-lg btn-block">Lagarto</button> 
             </div>
             <div>  
-              <button  onClick= {handleClick} name ="Spock" className= "btn btn-primary btn-lg btn-block">Spock</button> 
+              <button  onClick= {handleClick} name ="Spock" className= "btn btn-primary btn-lg btn-block" >Spock</button> 
             </div> 
           </div>
 

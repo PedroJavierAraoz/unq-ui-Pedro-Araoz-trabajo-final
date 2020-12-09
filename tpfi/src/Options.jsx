@@ -5,7 +5,6 @@ const Opciones= (props)=>{
         {props.data.map(dataElement=>{
            return(
            <button className= "btn btn-primary btn-lg btn-block"  
-                  
                    name={dataElement}> {dataElement} </button>
         )})
         }
