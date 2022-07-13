@@ -1,50 +1,13 @@
 import './App.css';
 import Header from './Header'
 import DisplayImage from './DisplayImage'
+import Score from './Score'
 import {useState} from 'react';
 
 
-function Resultado(props) {
-return(
-<h1>
-    {props.jugada}
-</h1>
-)
-}
-
-const  Score =  (props)=>{
-return(
-  <div className="row align-items-center">
-    <div className="col">
-        <h2>Jugador 1</h2>
-      <div>
-        <h1>{props.score1}</h1>
-      </div>
-    </div>
-    <div className="col-8">
-        <h2>Jugada</h2>
-    </div>
-    <div className="col">
-      <h2>Jugador 2</h2>
-      <div>
-        <h1> {props.score2} </h1>
-      </div>  
-    </div>
- </div>
-)}
-{/* <>
-      <h1>{props.score1}</h1>
-      <h2>a </h2>
-      <h1>{props.score2}</h1>
-</> */}
-
-
 const evalPlay= (j1,j2)=>{
- 
 if (j1 ===j2) return "Empate"
-
-let gana = "Jugada1";
-
+let gana = "Jugada1"
 switch (j1){
   case "Piedra": if (j2==="Spock" || j2=== "Papel") 
                     gana ="Jugada2"
@@ -88,12 +51,30 @@ const  selectPlay= ()=>{
  }
   return ret
 }
+const Resume = (props)=>{
+  const{j1,j2, estado}= props
 
+  return(
+    <div class="row">
+      <div class="col">
+        <h1>{j1}</h1>
+      </div>
+      <div class="col">
+        <h1> {estado} </h1>
+      </div>
+      <div class="col">
+      <h1> {j2}</h1>
+      </div>
+  </div>
+  )
+
+}
 const  App= ()=> {
   const [jugador1, setJugador1]= useState("")
   const [jugador2, setJugador2]= useState("")
   const [counter1, setCounter1]= useState(0)  
   const [counter2, setCounter2]= useState(0)  
+  const [respuesta, setRespuesta]= useState("")
   
   const handleClickReset=()=>{
       setCounter1(0)
@@ -111,8 +92,14 @@ const  App= ()=> {
     setJugador2(jugada2)
 
     const estado = evalPlay(jugada1,jugada2)
-    if (estado==="Jugada1") setCounter1(counter1+1)
-    if (estado==="Jugada2") setCounter2(counter2+1)
+    if (estado==="Jugada1") {
+      setCounter1(counter1+1)
+      setRespuesta("Gana contra")
+    }else
+    if (estado==="Jugada2") {
+      setCounter2(counter2+1)
+      setRespuesta("Pierde contra")
+     } else{setRespuesta("Iguala con")}
 
   }
 
@@ -142,7 +129,7 @@ const  App= ()=> {
           </div>
 
           <div className="col-8 App-Image ">
-            <div className="row align-items-end">
+            <div className="row align-items-center">
               <div className="col">
                 <DisplayImage jugada={jugador1} message= "Seleccione una jugada" side="left"/>
               </div> 
@@ -157,11 +144,8 @@ const  App= ()=> {
      
       <br/>
       <br/>
-   
-  <Resultado jugada={jugador1}></Resultado>
-  <h1> gana / poerde contra</h1>
-  <Resultado jugada={jugador2}></Resultado>
 
+      <Resume j1={jugador1} j2={jugador2} estado={respuesta} />
     </div>
   );
 }
