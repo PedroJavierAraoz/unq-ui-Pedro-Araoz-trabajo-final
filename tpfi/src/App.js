@@ -1,4 +1,6 @@
 import './App.css';
+import Header from './Header'
+import DisplayImage from './DisplayImage'
 import {useState} from 'react';
 
 
@@ -12,33 +14,51 @@ return(
 
 const  Score =  (props)=>{
 return(
-<>
+  <div className="row align-items-center">
+    <div className="col">
+        <h2>Jugador 1</h2>
+      <div>
+        <h1>{props.score1}</h1>
+      </div>
+    </div>
+    <div className="col-8">
+        <h2>Jugada</h2>
+    </div>
+    <div className="col">
+      <h2>Jugador 2</h2>
+      <div>
+        <h1> {props.score2} </h1>
+      </div>  
+    </div>
+ </div>
+)}
+{/* <>
       <h1>{props.score1}</h1>
       <h2>a </h2>
       <h1>{props.score2}</h1>
-</>
-)}
+</> */}
+
 
 const evalPlay= (j1,j2)=>{
  
-if (j1 ==j2) return "Empate"
+if (j1 ===j2) return "Empate"
 
 let gana = "Jugada1";
 
 switch (j1){
-  case "Piedra": if (j2=="Spock" || j2== "Papel") 
+  case "Piedra": if (j2==="Spock" || j2=== "Papel") 
                     gana ="Jugada2"
                   break;
-  case "Papel": if (j2=="Lagarto" || j2== "Tijera") 
+  case "Papel": if (j2==="Lagarto" || j2=== "Tijera") 
                     gana ="Jugada2"
                   break;
-  case "Tijera": if (j2=="Spock" || j2== "Piedra") 
+  case "Tijera": if (j2==="Spock" || j2=== "Piedra") 
                     gana ="Jugada2"
                   break;
-  case "Lagarto": if (j2=="Tijera" || j2== "Piedra") 
+  case "Lagarto": if (j2==="Tijera" || j2=== "Piedra") 
                     gana ="Jugada2"
                   break;
-  case "Spoke": if (j2=="Lagarto" || j2== "Papel") 
+  case "Spoke": if (j2==="Lagarto" || j2=== "Papel") 
                     gana ="Jugada2"
                   break;
   }
@@ -91,34 +111,53 @@ const  App= ()=> {
     setJugador2(jugada2)
 
     const estado = evalPlay(jugada1,jugada2)
-    if (estado=="Jugada1") setCounter1(counter1+1)
-    if (estado=="Jugada2") setCounter2(counter2+1)
+    if (estado==="Jugada1") setCounter1(counter1+1)
+    if (estado==="Jugada2") setCounter2(counter2+1)
 
   }
 
   return (
-    <div className="App">
-      <div>  
-              <button  onClick={handleClickReset} name= "Reset" className= "btn btn-primary btn-lg btn-block" >Reset</button> 
-      </div>
-
-      <div>  
-              <button  onClick={handleClick} name= "Piedra" className= "btn btn-primary btn-lg btn-block" >Piedra</button> 
-      </div>
-      <div>  
-              <button  onClick={handleClick} name= "Papel" className= "btn btn-primary btn-lg btn-block" >Papel</button> 
-      </div>
-      <div>  
-              <button  onClick={handleClick} name= "Tijera" className= "btn btn-primary btn-lg btn-block" >Tijera</button> 
-      </div>
-      <div>  
-              <button  onClick={handleClick} name= "Lagarto" className= "btn btn-primary btn-lg btn-block" >Lagarto</button> 
-      </div>
-      <div>  
-              <button  onClick={handleClick} name= "Spock" className= "btn btn-primary btn-lg btn-block" >Spock</button> 
-      </div>
+      <div className="container App">
+        <Header className=" App-header" handleReset={handleClickReset}>  </Header>
+        <Score score1={counter1} score2={counter2}/> 
+    
      
-   <Score score1={counter1} score2={counter2}/> 
+        <div className="row">
+          <div className="col">
+            <div>  
+              <button  onClick={handleClick} name= "Piedra" className= "btn btn-primary btn-lg btn-block" >Piedra</button> 
+            </div>
+            <div>  
+              <button  onClick= {handleClick} name ="Papel"className= "btn btn-primary btn-lg btn-block" >Papel</button> 
+            </div>
+            <div>  
+              <button  onClick= {handleClick} name ="Tijera" className= "btn btn-primary btn-lg btn-block" >Tijera</button> 
+            </div>
+            <div>  
+              <button  onClick= {handleClick} name ="Lagarto" className= "btn btn-primary btn-lg btn-block">Lagarto</button> 
+            </div>
+            <div>  
+              <button  onClick= {handleClick} name ="Spock" className= "btn btn-primary btn-lg btn-block" >Spock</button> 
+            </div> 
+          </div>
+
+          <div className="col-8 App-Image ">
+            <div className="row align-items-end">
+              <div className="col">
+                <DisplayImage jugada={jugador1} message= "Seleccione una jugada" side="left"/>
+              </div> 
+              <div className="col">
+                <DisplayImage jugada={jugador2} message= "" side="rigth"/>
+              </div> 
+            </div>
+          </div>
+          <div className="col">
+          </div>
+        </div>
+     
+      <br/>
+      <br/>
+   
   <Resultado jugada={jugador1}></Resultado>
   <h1> gana / poerde contra</h1>
   <Resultado jugada={jugador2}></Resultado>
