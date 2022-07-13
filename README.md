@@ -14,4 +14,5 @@
 
 Abra  la   consola de  git, dirijase   a la  carpeta   donde  desea instalar  el  proyecto,  por  ejemplo "C:\Users",  y clone  el  proyecto con la  linea 
 "$ git clone https://github.com/PedroJavierAraoz/unq-ui-Pedro-Araoz-trabajo-final.git" ,  y el proyecto quedara instalado  en su equipo. 
-Para  ejecutarlo  cambie a la  carpeta tpfi  con el comando "cd tpfi/",   luego  tipee  "npm Start" y  se  abrira  una  ventana del  navegador  con  el proyecto  en marcha.
+
+Para  ejecutarlo  cambie a la  carpeta tpfi  con el comando "cd tpfi/",   luego  tipee  "npm start" y  se  abrira  una  ventana del  navegador  con  el proyecto  en marcha. Luego  solo tiene que  desfrutar  del juego!!!
