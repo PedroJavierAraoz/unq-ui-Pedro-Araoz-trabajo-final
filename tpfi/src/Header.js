@@ -8,7 +8,7 @@ const Header = (props)=>{
             <div className="row align-items-center">
                 <div className="col">
                 </div>
-                <div className="col-8">
+                <div className="col-8 align-self-center">
                     <h1>
                         Juega a PPTLS
                     </h1>
