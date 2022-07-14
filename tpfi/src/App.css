@@ -1,6 +1,6 @@
 .App {
     min-width: auto;
-    min-height: 40em;
+    min-height:  50em;
     padding: 1em;
     text-align: center;
     background-color:rgb(175, 223, 238) ;
@@ -9,7 +9,7 @@
 }
 
 .App-Image{
-  min-height: auto ;
+  min-height: auto  ;
   border: 1px solid black;
   background-color: rgb(199, 226, 233);
   border-radius: 10px;
